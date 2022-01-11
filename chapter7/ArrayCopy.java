@@ -1,0 +1,22 @@
+package chapter7;
+
+public class ArrayCopy {
+
+	public static void main(String[] args) {
+		int[ ] array1 = {10, 20, 30, 40, 50};
+		int[ ] array2 = {1, 2, 3, 4, 5};
+		
+						// ①	 ②	  ③		④  ⑤
+		System.arraycopy(array1, 0, array2, 1, 4);
+		// ① 복사할 배열
+		// ② 복사할 첫 위치
+		// ③ 대상 배열
+		// ④ 붙여 넣을 첫 위치
+		// ⑤ 복사할 요소 개수
+		
+		for(int i=0; i<array2.length; i++) {
+			System.out.println(array2[i]);
+		}
+	}
+
+}
