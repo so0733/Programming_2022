@@ -387,6 +387,210 @@
 
 자바 프로그래밍 정리 노트[2022.01.14] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+📌 java.lang 패키지 : 기본적으로 많이 사용하는 클래스들이 포함됨
 
-자바 프로그래밍 정리 노트[2022.01.14] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+📌 Object 클래스 : 모든 자바 클래스의 최상위 클래스 (모든 클래스는 Object 클래스로부터 상속을 받음)
+   ◾ String toString() 메서드		- 객체를 문자열로 표현하여 반환
+   ◾ boolean equals(Object obj) 메서드	- 두 인스턴스가 동일한지 여부를 반환
+   ◾ int hashCode() 메서드		- 객체의 해시 코드 값을 반환
+   ◾ Object clone() 메서드		- 객체를 복제하여 동일한 멤버 변수 값을 가진 새로운 인스턴스를 생성
+   ◾ Class getClass() 메서드		- 객체의 Class 클래스를 반환
+   ◾ void finalize() 메서드		- 인스턴스가 힙 메모리에서 제거될 때 가비지 컬렉터(GC)에 의해 호출되는 메서드
+   ◾ void wait() 메서드		- 멀티스레드 프로그램에서 사용하는 메서드
+   ◾ void notify() 메서드		- wait() 메서드에 의해 기다리고 있는 스레드를 실행 가능한 상태로 가져옴
 
+📌 toString() 메서드 : 객체 정보를 문자열(String)로 바꿈
+   ◾ Object 클래스의 toString() 메서드
+	object.Book@16f65612		// 클래스 이름@해시 코드 값
+   ◾ String 클래스의 toString() 메서드
+	String str = new String("test");
+	System.out.printIn(str);		// test 출력됨
+   ◾ Integer 클래스의 toString() 메서드
+	Integer i1 = new Integer(100);
+	System.out.printIn(i1);		// 100 출력됨
+
+📌 equals() 메서드 : 두 인스턴스의 주소 값을 비교하여 boolean 값(true/false)을 반환해 줌
+
+📌 hashCode() 메서드
+   ◾ 해시(hash) : 정보를 저장하거나 검색할 때 사용하는 자료 구조
+   ◾ 해시 함수 : 객체의 특정 정보를 매개변수 값으로 넣으면 그 객체가 저장되어야 할 위치나 저장된 해시 테이블 주소(위치)를 반환함
+	hashCode = hash(key);		// 객체의 해시 코드 값(메모리 위치 값)이 반환됨
+
+📌 Clone() 메서드 : 기본 틀(prototype)의 복사본을 사용해 동일한 인스턴스를 만들어 복잡한 생성 과정을 간단히 함
+	protected Object clone();
+
+📌 String 클래스 : 문자열 사용
+   ◾ 상수 풀(constant pool) : 상수 값을 저장하는 공간
+
+📌 Wrapper 클래스 : 클래스를 기본 자료형으로 감쌈
+   ◾ 	기본형		         Wrapper 클래스
+	boolean			Boolean
+	byte			Byte
+	char			Character
+	short			Short
+	int			Integer
+	long			Long
+	float			Float
+	double			Double
+
+자바 프로그래밍 정리 노트[2022.01.17] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+📌 제네릭 : 어떤 값이 여러 참조 자료형을 사용할 수 있도록 함
+   ◾ 여러 참조 자료형이 쓰일 수 있는 곳에 특정한 자료형을 지정하지 않고 클래스나 메서드를 정의한 후 사용하는 시점에 어떤 자료형을 사용할 것인지 지정함
+
+   ◾ 제네릭 클래스 정의
+	public class GenericPrinter<T> {	// 제네릭 클래스
+	
+	}
+   ◾ 다이아 몬드 연산자 < >
+	ArrayList<String> list = new ArrayList< >( );
+
+   ◾ 자료형 매개변수 T 와 static
+	static 변수나 메서드는 인스턴스를 생성하지 않아도 클래스 이름으로 호출이 가능함
+
+   ◾ T extends 클래스 : 제네릭 클래스에서 T자료형에 사용할 자료형에 제한을 둠
+
+   ◾ 제네릭 메서드
+	public <자료형 매개변수> 반환형 메서드 이름(자료형 매개변수) { }
+
+📌 컬렉션 프레임 워크 : 필요한 자료 구조를 미리 구현하여 java.util 패키지에서 제공함
+   ◾ Collection 인터페이스
+         ① List 인터페이스 : 순서가 있는 자료 관리, 중복 허용			(ArrayList, Vectior, LinkedList, Stack, Queue)
+         ② Set 인터페이스 : 순서가 정해져 있지 않음, 중복을 허용하지 않음	(HashSet, TressSet)
+   ◾ Collection 인터페이스에 선언된 메서드
+	boolean add(E e)		: Collection에 객체를 추가
+	void clear( )		: Collection의 모든 객체를 제거
+	lterator(E) iterator		: Collection을 순환할 반복자(Iterator)를 반환함
+	boolean remove(Object o)	: Collection에 매개변수에 해당하는 인스턴스가 존재하면 제거
+	int size( )			: Collection에 있는 요소의 개수를 반환
+
+   ◾ Map 인터페이스 : 쌍으로 되어 있는 자료를 관리하는 메서드들이 선언되어 있음, 키-값(Key-Value) 쌍으로 구성되며 키 값은 중복이 없음 (Hashtable, hashMap, TreeMap)
+   ◾ Map 인터페이스에 선언된 메서드
+	V put(K key, V value)		   : key에 해당하는 value 값을 map에 넣음
+	V get(K key)			   : key에 해당하는 value 값을 반환
+	boolean isEmpty( )			   : Map이 비었는지 여부를 반환
+	boolean containsKey(Object key)	   : Map에 해당하는 key가 있는지 여부를 반환
+	boolean containsValue(Object value)	   : Map에 해당하는 value가 있는지 여부를 반환
+	Set keyset( )			   : key 집합을 Set으로 반환(중복 안되므로 Set)
+	Collection values( )			   : value를 Collection으로 반환(중복무관)
+	V remove(key)			   : key가 있는 경우 삭제
+	boolean remove(Object key, Object value) : key가 있는 경우 key에 해당하는 value가 매개변수와 일치할 때 삭제
+
+📌 List 인터페이스 : 객체를 순서에 따라 저장하고 유지하는데 필요한 메서드가 선언되어 있음
+   ◾ ArrayList 클래스 : 객체 순서를 기반으로 순차적으로 자료를 관리하는 프로그램을 구현
+   ◾ Vector 클래스 : 배열을 구현한 클래스로 동기화를 지원함 ( 두 개 이상의 스레드가 동시에 Vector를 사용할 경우 오류가 나지 않도록 실행 순서를 보장함)
+	Collections.synchronizedList(new ArrayList<String>( ));
+   ◾ LinkedList 클래스 : 링크드 리스트를 활용해 자료를 삽입, 삭제할 떄 나머지 자료를 이동시켜 빈 공간을 만들지 않고 연속된 자료 구조를 구현함
+	💡 링크드 리스트 구조 
+	   링크드 리스트의 각 요소는 다음 요소를 가리키는 주소 값을 가짐	
+	   물리적인 메모리는 떨어져 있어도 논리적으로는 앞뒤 순서를 가짐
+	   링크드 리스트에 세 요소 A,B,D가 순차적으로 저장된 상태에서 C요소를 추가
+		링크드 리스트에 요소 추가 : A → B → D
+		링크드 리스트에 요소 추가 : A → B → C → D
+	💡 ArrayList로 스택과 큐를 구현 
+	   LIFO : 맨 나중에 추가된 데이터를 먼저 꺼냄
+	   FIFO : 먼저 추가된 데이터부터 꺼내서 사용
+
+📌 Set 인터페이스 : 순서와 상관없이 중복을 허용하지 않음
+   ◾ HashSet 클래스 : 집합 자료 구조를 구현하며 중복을 허용하지 않음
+   ◾ TreeSet 클래스 : 자료의 중복을 허용하지 않으며 출력 결과 값을 정렬하는 클래스
+	이진 검색 트리(BST) : 노드에 저장되는 자료의 중복을 허용하지 않고 부모가 가지는 자식노드의 수가 2개 이하임
+   ◾ Comparable 인터페이스 : 자기 자신과 전달받은 매개변수를 비교
+   ◾ Comparator 인터페이스 : 두 매개변수를 비교
+
+📌 Map 인터페이스 : 자료를 쌍으로 관리하는데 필요한 메서드가 정의되어 있음
+   ◾ HashMap 클래스 : 해시 방식으로 자료를 관리
+   ◾ TreeMap 클래스 : 이진 검색 트리로 구현되어 있으며 key값으로 정렬할 수 있음
+
+자바 프로그래밍 정리 노트[2022.01.18] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+📌 내부 클래스 (inner class) : 클래스 내부에 선언한 클래스
+	class Out {	// 외부 클래스
+	   class In {	// 내부 클래스
+
+	   }
+	}
+
+   ◾ 인스턴스 내부 클래스 (instance inner class) : 인스턴스 변수를 선언할 때와 같은 위치에 선언하며 외부 클래스 내부에서만 생성하여 사용하는 객체를 선언
+   ◾ 정적(static) 내부 클래스 (static inner class) : 외부 클래스의 멤버 변수와 같은 위치에 정의하며 static 예약어를 함께 사용
+	일반 메서드 (void in Test()) 
+		외부 클래스의 인스턴스 변수(num)		사용 불가 (X)
+		외부 클래스의 정적 변수(sNum)		사용 가능 (O)
+		정적 내부 클래스의 인스턴스 변수(inNum)	사용 가능 (O)
+		정적 내부 클래스의 정적 변수(sInNum)		사용 가능 (O)
+
+	정적 메서드 (static void sTest()
+		외부 클래스의 인스턴스 변수(num)		사용 불가 (X)
+		외부 클래스의 정적 변수(sNum)		사용 가능 (O)
+		정적 내부 클래스의 인스턴스 변수(inNum)	사용 불가 (X)
+		정적 내부 클래스의 정적 변수(sInNum)		사용 가능 (O)
+   ◾ 지역(local) 내부 클래스 : 지역 변수처럼 메서드 내부에 클래스를 정의하여 사용, 메서드 안에서만 사용 가능함
+   ◾ 익명(anonymous) 내부 클래스 : 클래스 이름을 사용하지 않는 클래스, 단 하나의 인터페이스 또는 단 하나의 추상 클래스를 바로 생성할 수 있음
+
+📌 내부 클래스 정리
+			[구현위치]				[사용할 수 있는 외부 클래스 변수]	[생성방법]
+   ◾ 인스턴스 내부 클래스	외부 클래스 멤버 변수와 동일			외부 인스턴스 변수, 외부 전역 변수	외부 클래스를 먼저 만든 후 내부 클래스 생성
+   ◾ 정적 내부 클래스	외부 클래스 멤버 변수와 동일			외부 전역변수			외부 클래스와 무관하게 생성
+   ◾ 지역 내부 클래스	메서드 내부에 구현				외부 인스턴스 변수, 외부 전역 변수	메서드를 호출할 때 생성
+   ◾ 익명 내부 클래스	메서드 내부에 구현, 변수에 대입하여 직접 구현	외부 인스턴스 변수, 외부 전역 변수	메서드를 호출할 때 생성되거나 인터페이스 타입 변수에 대입할 때 new 예약어를 사용해 생성
+
+📌 함수형 프로그래밍(Fucntional Programming: FP) : 함수의 구현과 호출만으로 프로그램을 만들 수 있는 프로그래밍
+
+📌 람다식(Lambda expression) : 자바에서 제공하는 함수형 프로그래밍 방식, 함수 이름이 없는 익명 함수를 만듬
+	(매개변수) -> {실행문;}
+
+📌 함수형 인터페이스
+   ◾ @Functionallnterface 애노테이션 : 람다식으로 구현한 인터페이스에 실수로 다른 메서드를 추가하는 것을 막기 위해 사용
+
+📌 스트림(stream) : 여러 자료의 처리에 대한 기능을 구현해 놓은 클래스, 자료를 추상화함
+   ◾ 스트림 연산
+	중간 연산 - filter(), map()
+	최종 연산 - forEach(), count(), sum(), reduce()
+   ◾ Stream<E> stream() 메서드 : 스트림 클래스를 반환함
+   ◾ 스트림 특징
+	1. 자료의 대상과 관계없이 동일한 연산을 수행함
+	2. 한 번 생성하고 사용한 스트림은 재사용 할 수 없음
+	3. 스트림의 연산은 기존 자료를 변경하지 않음
+	4. 스트림의 연산은 중간 연산과 최종 연산이 있음
+
+📌 오류(error)
+   ◾ 컴파일 오류(compile error) : 프로그램 코드 작성 중 실수로 발생하는 오류 
+   ◾ 실행 오류(runtime error) : 실행 중인 프로그램이 의도하지 않은 동작을 하거나 프로그램이 중지 되는 오류
+
+   ◾ 로그(log) 분석 : 로그 파일을 활용해 오류 원인을 찾을 수 있고 예외 상황을 파악하고 버그를 수정할 수 있음
+
+   ◾ 예외(exception) : 프로그램에서 제어 가능
+   ◾ 시스템 오류(error) :  사용 가능한 동적 메모리가 없는 경우, 스택의 메모리의 오버플로우가 발생한 경우 등
+
+📌 예외 클래스(Exception 클래스)
+   ◾ 입출력 예외 처리(IOException)
+   ◾ 실행 오류 예외 처리(RuntimeException)
+
+📌 예외 처리
+   ◾ try-catch문
+	try {
+	   예외가 발생할 수 있는 코드 부분
+	} catch(처리할 예외 타입 e) {
+	   try 블록 안에서 예외가 발생했을 때 예외를 처리하는 부분
+	}
+
+   ◾ try-catch-finally문
+	try {
+	   예외가 발생할 수 있는 코드 부분
+	} catch(처리할 예외 타입 e) {
+	   예외를 처리하는 부분
+	} finally {
+	   항상 수행되는 부분
+	}
+
+   ◾ try-with-resources문 : close() 메서드를 명시적으로 호출하지 않아도 try 블록 내에서 열린 리소스를 자동으로 닫도록 만듬, AutoCloseable 인터페이스를 구현해야 함
+	try (A a = new A( ); B b = new B( )) {
+	
+	} catch(Exception e) {
+	
+	}
+
+📌 예외 처리 미루기
+   ◾ throws : 예외를 해당 메서드에서 처리하지 않고 미룬 후 메서드를 호출해 사용하는 부분에서 예외를 처리하는 방법
+
+자바 프로그래밍 정리 노트[2022.01.18] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
